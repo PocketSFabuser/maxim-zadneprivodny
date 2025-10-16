@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title> Авторизация </title>
+    </head>
+    <style> 
+        body {
+            background-color: #363636;
+        }
+        .main {
+            background-color: #404040;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 50vh;
+            height: auto;
+            margin-left: 33%;
+            margin-top: 20%;
+            h1{
+                color: aliceblue;
+                padding: 4vh;
+            }
+        } .main:hover {
+            transform: scale(1.05);
+            background-color: #303030;
+            animation:  main-hover 0.8s;
+        } .main:not(:hover) {
+            background-color: #404040;
+            animation: main-unhover 0.3s;
+        }
+
+        @keyframes main-hover {
+            from {
+                background-color: #404040;
+                transform: scale(1);
+            }
+            to {
+                background-color: #303030;
+                transform: scale(1.05);
+            }
+        } 
+        @keyframes main-unhover {
+            to {
+                background-color: #404040;
+            }
+            from {
+                background-color: #303030;
+                transform: scale(1.05);
+            }
+        }
+        button {
+            color: aliceblue;
+            width: 10vh;
+            margin: 2vh;
+            padding: 10px;
+            background-color: #454545;
+            border: hidden;
+            border-radius: 12px;
+        }
+        input {
+            color: aliceblue;
+            width: 23vh;
+            text-align: center;
+            padding: 10px;
+            background-color: #454545;
+            border: hidden;
+            border-radius: 12px;
+        }
+    </style>
+    <body>
+        <div class="main"> 
+            <h1> Введите название файла </h1>
+            <input placeholder="Полное имя с расширением" id="vvod">
+            <br>
+            <button id="auth"> Go! </button>
+        </div>
+        <script> 
+            const inp = document.getElementById('vvod');
+            const btn = document.getElementById('auth');
+
+            window.onload = () => {
+                console.log('start');
+                auth.addEventListener('click', () => {
+                        if (vvod.value == 'масыс') {
+                            open('./masos.html', '_self');
+                            console.log('vvod prokaet');
+                        } else { 
+                            vvod.value = 'Ошибка ввода';
+                            console.error('proebal');
+                        }
+                });
+            }
+        </script>
+    </body>
+</html>
