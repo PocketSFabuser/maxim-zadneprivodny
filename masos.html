@@ -1,68 +1,135 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
             Топливный насос низкого давления
         </title>
+        <!-- Web font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
         <style>
-            body {
-                background-color: rgb(221, 221, 221);
-                color: rgb(0, 0, 0);
-                -webkit-text-stroke-color: black;
-                -webkit-text-stroke-width: 0.1px;
+            :root {
+                --page-bg: #e6e7ea;
+                --text-color: #121316;
+                --card-bg: #ffffff;
+                --accent: #2d6cdf;
             }
 
-            /* Hover-to-zoom overlay styles */
+            * { box-sizing: border-box; }
+
+            body {
+                margin: 0;
+                background-color: var(--page-bg);
+                color: var(--text-color);
+                font-family: 'Montserrat', 'Segoe UI', Roboto, Inter, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .head, .main {
+                max-width: 90ch;
+                margin: 0 auto;
+                padding: 2rem 1rem;
+                text-align: center;
+            }
+
+            h1, h2 {
+                margin: 0 0 1rem;
+                line-height: 1.25;
+                text-wrap: balance;
+            }
+
+            p, li {
+                margin: 0.4rem 0;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+                hyphens: auto;
+            }
+
+            ul, ol { padding-left: 1.25rem; text-align: left; display: inline-block; }
+
+            /* Thumbnail container ~5vh x 5vh */
+            .image-wrapper {
+                position: relative;
+                display: inline-block;
+                width: 5vh;
+                height: 5vh;
+                margin: 1rem;
+                border-radius: 10px;
+                overflow: visible;
+            }
+
+            /* Thumbnail image, small by default */
             .zoomable {
                 cursor: zoom-in;
-                max-width: 100%;
-                height: auto;
-                transition: transform 0.2s ease-in-out;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+                transform-origin: center;
+                transition: transform 0.35s cubic-bezier(.2, .8, .2, 1),
+                            filter 0.3s ease,
+                            box-shadow 0.3s ease;
             }
 
+            /* Hover enlarge + darken for thumbnails */
+            .image-wrapper:hover .zoomable {
+                transform: scale(2.2);
+                filter: brightness(0.9) saturate(1.05);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            }
+
+            /* Overlay for full-size view (click to open) */
             .zoom-overlay {
                 position: fixed;
                 inset: 0;
-                display: none; /* hidden by default */
+                display: flex;
                 align-items: center;
                 justify-content: center;
                 background: rgba(0, 0, 0, 0.7);
                 z-index: 9999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.35s ease;
             }
 
             .zoom-overlay.is-active {
-                display: flex;
+                opacity: 1;
+                pointer-events: auto;
             }
 
             .zoom-overlay__img {
                 max-width: 90vw;
                 max-height: 90vh;
-                border-radius: 8px;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+                border-radius: 12px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
                 background: #111;
+                transform: scale(0.98);
+                opacity: 0;
+                transition: transform 0.35s cubic-bezier(.2, .8, .2, 1), opacity 0.35s ease;
+            }
+
+            .zoom-overlay.is-active .zoom-overlay__img {
+                transform: scale(1);
+                opacity: 1;
             }
         </style>
     </head>
     <body>
         <div class="head">
             <h1> Тема презентации - топливный насос низкого давления </h1>
-            <p> 
-                Содержание: 
-            </p>
-            <li>
-                <li>
-                    Назначение ТННД
-                </li>
-                <li>
-                    Устройство ТННД
-                </li>
-                <li>
-                    Принцип работы
-                </li>
-                <li>
-                    Функции 
-                </li>
-            </li>
+            <p>Содержание:</p>
+            <ul>
+                <li>Назначение ТННД</li>
+                <li>Устройство ТННД</li>
+                <li>Принцип работы</li>
+                <li>Функции</li>
+            </ul>
         </div>
         <div class="main">
             <h2> Назначение топливного насоса высокого давления </h2>
@@ -70,9 +137,11 @@
                 и создает минимальное необходимое давление для его работы"</p>
             <p> Устройство. Представляет собой компактный насос с электрическим приводом, который может быть установлен как внутри топливного бака (чаще всего), так и снаружи. </p>
             <p> Он состоит из: </p>
-            <li> Сеточка грубой очистки </li>
-            <li> Электромоторчика </li>
-            <li> Копруса </li>
+            <ul>
+                <li>Сеточка грубой очистки</li>
+                <li>Электромоторчика</li>
+                <li>Корпуса</li>
+            </ul>
             <p> Выглядит он так: </p>
             <!-- Изображение насоса, увеличивающееся при наведении курсора -->
             <div class="image-wrapper">
@@ -83,21 +152,19 @@
                 />
             </div>
             <p> Принцип работы ТННД. </p>
-            <li>Pоликовый/шестеренчатый насос. Электродвигатель приводит в движение рабочую часть (ролики или шестерни), которая создает давление и перекачивает топливо. </li>
-            <li>Струйный насос. Электрический насос создает поток, который через инжектор подхватывает дополнительное топливо из бака и подает его в систему.</li>
-            <li>Tурбинный насос. Использует вращающуюся крыльчатку для создания потока, который перекачивает топливо.</li>
+            <ul>
+                <li>Pоликовый/шестеренчатый насос. Электродвигатель приводит в движение рабочую часть (ролики или шестерни), которая создает давление и перекачивает топливо.</li>
+                <li>Струйный насос. Электрический насос создает поток, который через инжектор подхватывает дополнительное топливо из бака и подает его в систему.</li>
+                <li>Tурбинный насос. Использует вращающуюся крыльчатку для создания потока, который перекачивает топливо.</li>
+            </ul>
             <p> 
                 Функции.
             </p>
-            <li>
-                Подкачка топлива. Основная задача — подать топливо из бака, преодолевая сопротивление топливопроводов и фильтров.
-            </li>
-            <li>
-                Поддержание давления. Обеспечивает стабильное давление в контуре низкого давления, что необходимо для правильной работы всей системы питания, особенно для насоса высокого давления в дизельных системах.
-            </li>
-            <li>
-                Прокачка системы. В дизельных двигателях с механическим ТННД может использоваться для прокачки системы после замены фильтра или ремонта. 
-            </li>
+            <ul>
+                <li>Подкачка топлива. Основная задача — подать топливо из бака, преодолевая сопротивление топливопроводов и фильтров.</li>
+                <li>Поддержание давления. Обеспечивает стабильное давление в контуре низкого давления, что необходимо для правильной работы всей системы питания, особенно для насоса высокого давления в дизельных системах.</li>
+                <li>Прокачка системы. В дизельных двигателях с механическим ТННД может использоваться для прокачки системы после замены фильтра или ремонта.</li>
+            </ul>
 
             <p> Расположение ТННД на схеме питания </p>
             <div class="image-wrapper">
@@ -114,7 +181,7 @@
         </div>
     </body>
     <script>
-        // Hover-zoom behavior: open overlay on image hover, close on mouse leave/click/Escape
+        // Click-to-zoom overlay with smooth fade/scale; thumbnails have hover scale/darken
         document.addEventListener('DOMContentLoaded', function () {
             const overlay = document.getElementById('zoomOverlay');
             const overlayImg = document.getElementById('zoomOverlayImg');
@@ -133,7 +200,7 @@
             }
 
             document.querySelectorAll('img.zoomable').forEach((img) => {
-                img.addEventListener('mouseenter', () => openOverlay(img.src, img.alt));
+                img.addEventListener('click', () => openOverlay(img.src, img.alt));
             });
 
             overlay.addEventListener('mouseleave', closeOverlay);
